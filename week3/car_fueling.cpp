@@ -7,8 +7,43 @@ using std::vector;
 using std::max;
 
 int compute_min_refills(int dist, int tank, vector<int> & stops) {
+
     // write your code here
-    return -1;
+    int res = tank, pos = 0;
+    int cnt = 0, i = 0;
+
+    for(int i =0;i<stops.size();i++)
+    {
+  //  printf("%d %d %d\n",i,res,pos);
+    int d = stops[i]-pos;
+    if(d>tank) return -1;
+    if(d<=tank){
+        if(d<=res)
+        {
+        res = res -d;
+        pos=stops[i];
+//        continue;
+        }
+        else{
+
+        cnt++;
+        res = tank-d;
+        pos=stops[i];
+        }
+
+    }
+
+    }
+//    printf("%d %d\n",res,pos);
+    if(dist-pos>tank) return -1;
+    else {
+    if((dist-pos)<=res)
+        return cnt;
+    else cnt++;
+    }
+
+
+    return cnt;
 }
 
 
